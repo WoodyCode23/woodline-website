@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/woodli8/public_html/
+    - /bin/cp -R index.html $DEPLOYPATH
+    - /bin/cp -R services.html $DEPLOYPATH
+    - /bin/cp -R email-signature.html $DEPLOYPATH
+    - /bin/cp -R css $DEPLOYPATH
+    - /bin/cp -R js $DEPLOYPATH
