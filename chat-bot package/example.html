@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Widget Example - Wood Tide Travel</title>
+
+    <!-- EmailJS SDK (required) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Flatpickr for date picker (optional but recommended) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Chat Widget CSS -->
+    <link rel="stylesheet" href="chat-widget.css">
+
+    <style>
+        /* Basic page styling for the example */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2838 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #c9a961;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .instructions h2 {
+            color: #c9a961;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            line-height: 2;
+        }
+
+        .note {
+            background: rgba(201, 169, 97, 0.2);
+            border-left: 4px solid #c9a961;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wood Tide Travel Chat Widget</h1>
+        <p>This is an example page showing how to integrate the chat widget. Look for the chat button in the bottom-right corner!</p>
+
+        <div class="instructions">
+            <h2>Quick Start Guide</h2>
+            <ol>
+                <li>Make sure you have EmailJS configured (see README.md)</li>
+                <li>Update the EmailJS credentials in the script below</li>
+                <li>Copy all files to your website directory</li>
+                <li>Include the CSS and JS files in your HTML</li>
+                <li>The chat button will automatically appear!</li>
+            </ol>
+
+            <div class="note">
+                <strong>Note:</strong> You need to configure EmailJS before the form submissions will work.
+                Replace the placeholder credentials below with your actual EmailJS Public Key, Service ID, and Template ID.
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS Configuration -->
+    <script>
+        // ==================== EMAILJS CONFIGURATION ====================
+        // REPLACE THESE WITH YOUR ACTUAL EMAILJS CREDENTIALS
+        const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY_HERE';  // Get from EmailJS dashboard
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID_HERE';          // Get from EmailJS dashboard
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_HERE';        // Get from EmailJS dashboard
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+    </script>
+
+    <!-- Chat Widget Script -->
+    <script src="chat-widget.js"></script>
+    <script>
+        // Initialize Chat Widget
+        const chatWidget = new WoodTideChatWidget({
+            apiUrl: '', // Leave empty for EmailJS-only mode
+            emailjs: {
+                serviceId: EMAILJS_SERVICE_ID,
+                templateId: EMAILJS_TEMPLATE_ID,
+                userId: EMAILJS_PUBLIC_KEY
+            }
+        });
+
+        console.log('✅ Chat widget initialized');
+    </script>
+</body>
+</html>

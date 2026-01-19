@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Woodline Technologies Services - Custom Website Development, Hosting & Management for Small Businesses">
+    <title>Our Services | Woodline Technologies</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat-widget.css">
+
+    <!-- EmailJS SDK (optional - for form submissions) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <style>
+        /* Page Header */
+        .page-header {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 150px 20px 80px;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .page-header p {
+            font-size: 1.4rem;
+            color: #a8a8a8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+        }
+
+        .service-block {
+            background: rgba(22, 27, 34, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .service-block:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            background: rgba(22, 27, 34, 0.8);
+        }
+
+        .service-block h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .service-block h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .service-block p {
+            font-size: 1.2rem;
+            color: #c0c0c0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .service-block ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+
+        .service-block ul li {
+            font-size: 1.1rem;
+            color: #e8e8e8;
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .service-block ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Pricing Info */
+        .pricing-note {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #ffffff;
+            padding: 20px 25px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+
+        .pricing-note p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #e8e8e8;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 80px 20px;
+            background: rgba(22, 27, 34, 0.3);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 35px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+            background: rgba(22, 27, 34, 0.8);
+        }
+
+        .review-stars {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            color: #c0c0c0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-author {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .review-source {
+            color: #a8a8a8;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .reviews-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #a8a8a8;
+            font-size: 1.1rem;
+        }
+
+        .reviews-placeholder p {
+            margin-bottom: 10px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff, #d0d0d0);
+            color: #0d1117;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .service-block {
+                padding: 35px 25px;
+            }
+
+            .service-block h2 {
+                font-size: 2rem;
+            }
+
+            .service-block h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo-container">
+                <span class="logo-letters">WT</span>
+                <span class="logo-text">Woodline</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#tech">Tech Stack</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive web solutions designed to help small businesses succeed online</p>
+        </div>
+    </section>
+
+    <!-- Service Details -->
+    <section class="service-details">
+        <div class="container">
+            <!-- Website Development for Small Businesses -->
+            <div class="service-block">
+                <h2>🌐 Custom Website Development for Small Businesses</h2>
+                <p>We specialize in creating simple, effective websites that help small businesses make that crucial first contact with potential customers. Your website is often the first impression customers have of your business—we make sure it's a great one.</p>
+
+                <h3>What We Build</h3>
+                <ul>
+                    <li>Professional business websites that showcase your products and services</li>
+                    <li>Contact forms and inquiry systems to capture leads</li>
+                    <li>Mobile-responsive designs that look great on all devices</li>
+                    <li>Fast-loading pages optimized for search engines</li>
+                    <li>Clear calls-to-action that convert visitors into customers</li>
+                    <li>Easy-to-navigate layouts that guide customers to what they need</li>
+                </ul>
+
+                <h3>Perfect For</h3>
+                <p>Local businesses, service providers, consultants, retail shops, restaurants, and any small business looking to establish or improve their online presence.</p>
+
+                <div class="pricing-note">
+                    <p><strong>Custom Pricing:</strong> Every business is unique. We'll work with you to understand your needs and provide a tailored quote that fits your budget and goals.</p>
+                </div>
+            </div>
+
+            <!-- Website Hosting & Management -->
+            <div class="service-block">
+                <h2>☁️ Website Hosting & Management</h2>
+                <p>Building your website is just the beginning. We offer comprehensive hosting and ongoing management services so you can focus on running your business while we keep your website running smoothly.</p>
+
+                <h3>What's Included</h3>
+                <ul>
+                    <li>Reliable, secure web hosting with 99.9% uptime</li>
+                    <li>Regular software updates and security patches</li>
+                    <li>Daily backups to protect your data</li>
+                    <li>SSL certificates for secure, encrypted connections</li>
+                    <li>Performance monitoring and optimization</li>
+                    <li>Content updates and changes as needed</li>
+                    <li>Technical support when you need it</li>
+                    <li>Email hosting for professional business email addresses</li>
+                </ul>
+
+                <h3>Hassle-Free Maintenance</h3>
+                <p>No technical knowledge required. We handle all the backend work—updates, security, backups, and troubleshooting—while you enjoy a website that works flawlessly.</p>
+
+                <div class="pricing-note">
+                    <p><strong>Monthly Service:</strong> Our hosting and management packages are billed monthly, giving you predictable costs and the flexibility to adjust as your business grows. Contact us for a personalized quote.</p>
+                </div>
+            </div>
+
+            <!-- AI Chatbot Solutions -->
+            <div class="service-block">
+                <h2>🤖 AI Chatbot Solutions</h2>
+                <p>Enhance customer engagement with intelligent chatbots that work 24/7 to answer questions, qualify leads, and provide instant support.</p>
+
+                <h3>Key Benefits</h3>
+                <ul>
+                    <li>24/7 automated customer support</li>
+                    <li>Instant responses to common questions</li>
+                    <li>Lead qualification and data collection</li>
+                    <li>Integration with your existing website</li>
+                    <li>Customized to your business and industry</li>
+                    <li>Reduces workload on your team</li>
+                </ul>
+
+                <div class="pricing-note">
+                    <p><strong>Custom Solutions:</strong> AI chatbot pricing varies based on complexity and features. Let's discuss your specific needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Real reviews from real businesses</p>
+
+            <!-- Placeholder for reviews - will be populated via API integration -->
+            <div class="reviews-grid" id="reviews-container">
+                <div class="reviews-placeholder">
+                    <p>⭐ Reviews coming soon!</p>
+                    <p>We're currently integrating with popular review platforms to display authentic customer feedback.</p>
+                    <p style="margin-top: 20px; font-size: 0.95rem;">Check back soon or <a href="index.html#contact" style="color: #ffffff; text-decoration: underline;">contact us</a> for references.</p>
+                </div>
+            </div>
+
+            <!-- Example review structure (hidden, for future API integration) -->
+            <div style="display: none;" class="review-template">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Review text will go here"</p>
+                    <div class="review-author">Customer Name</div>
+                    <div class="review-source">Source: Google Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Get Started?</h2>
+            <p class="section-subtitle">Let's discuss how we can help your business grow online</p>
+            <a href="index.html#contact" class="cta-button">Contact Us Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Woodline Technologies, LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script>
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // TODO: Integrate review API
+        // Function to fetch and display reviews from popular platforms
+        async function loadReviews() {
+            // This will be implemented to pull from:
+            // - Google Reviews API
+            // - Yelp API
+            // - Facebook Reviews
+            // - Other review platforms
+
+            // Example structure:
+            // const reviews = await fetch('YOUR_REVIEW_API_ENDPOINT');
+            // const data = await reviews.json();
+            // populateReviews(data);
+        }
+
+        function populateReviews(reviewsData) {
+            const container = document.getElementById('reviews-container');
+            // Clear placeholder
+            container.innerHTML = '';
+
+            // Add review cards dynamically
+            reviewsData.forEach(review => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
+                    <p class="review-text">"${review.text}"</p>
+                    <div class="review-author">${review.author}</div>
+                    <div class="review-source">Source: ${review.source}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Uncomment when ready to integrate
+        // loadReviews();
+
+        // Initialize Chat Widget
+        const chatWidget = new WoodlineChatWidget({
+            emailjs: {
+                serviceId: 'service_h5nm74d',
+                templateId: 'template_1e9sfav',
+                userId: 'vb6jANY1PVAbg3clF'
+            }
+        });
+
+        console.log('✅ Chat widget ready');
+    </script>
+
+    <!-- Chat Widget Script -->
+    <script src="js/chat-widget.js"></script>
+</body>
+</html>
