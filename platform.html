@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Woodline Technologies Platform - CRM, Scheduling, Email Marketing, Invoicing, AI Chatbot, and Website Hosting for Small Businesses">
+    <title>Our Platform | Woodline Technologies</title>
+    <link rel="stylesheet" href="css/chat-widget.css">
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #e8e8e8;
+            background-color: #0d1117;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-letters {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8e8e8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Page Header */
+        .page-header {
+            min-height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 150px 20px 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: #a8a8a8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            padding: 80px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-section:nth-child(even) {
+            background: rgba(22, 27, 34, 0.3);
+        }
+
+        .feature-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-header h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-header p {
+            font-size: 1.2rem;
+            color: #a8a8a8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Feature Content */
+        .feature-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .feature-details h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #c0c0c0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Example Box */
+        .example-box {
+            background: rgba(22, 27, 34, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .example-box h4 {
+            font-size: 1rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .example-box h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .example-box p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .example-box .example-result {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ffffff;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box .example-result p {
+            margin: 0;
+            font-style: italic;
+            color: #e8e8e8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #a8a8a8;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff, #d0d0d0);
+            color: #0d1117;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(13, 17, 23, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #a8a8a8;
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0d1117;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-header h2 {
+                font-size: 2rem;
+            }
+
+            .feature-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo-container">
+                <span class="logo-letters">WT</span>
+                <span class="logo-text">Woodline</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="platform.html">Platform</a></li>
+                <li><a href="services.html">Pricing</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>The Complete Business Platform</h1>
+            <p>Everything you need to manage customers, book appointments, send invoices, and grow your business—all in one place.</p>
+        </div>
+    </section>
+
+    <!-- CRM & Dashboard -->
+    <section class="feature-section" id="crm">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">📊</span>
+                <h2>Business Dashboard & CRM</h2>
+                <p>Your command center for managing every customer relationship</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Centralized contact database with all customer info</li>
+                        <li>Lead tracking from first contact to closed deal</li>
+                        <li>Activity timeline showing every interaction</li>
+                        <li>Notes and tags to keep track of important details</li>
+                        <li>Search and filter to find any customer instantly</li>
+                        <li>Mobile-friendly—access from anywhere</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Mike's Plumbing Services</h3>
+                    <p>Mike used to keep customer info in a notebook and sticky notes. Jobs would slip through the cracks, and he'd forget to follow up on estimates.</p>
+                    <p>Now every lead from his website goes straight into his dashboard. He can see who needs a callback, which estimates are pending, and which customers are due for annual maintenance.</p>
+                    <div class="example-result">
+                        <p>"I stopped losing leads. Last month I closed 3 jobs just from following up on old estimates I'd forgotten about."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking & Scheduling -->
+    <section class="feature-section" id="booking">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">📅</span>
+                <h2>Booking & Scheduling</h2>
+                <p>Let customers book appointments online—no more phone tag</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Online booking page customers can access 24/7</li>
+                        <li>Set your available hours and service types</li>
+                        <li>Automatic confirmation emails to customers</li>
+                        <li>Reminder notifications to reduce no-shows</li>
+                        <li>Calendar view of all upcoming appointments</li>
+                        <li>Reschedule or cancel with one click</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Sarah's Consulting Practice</h3>
+                    <p>Sarah spent hours each week going back and forth with clients trying to find meeting times. Emails, texts, missed calls—scheduling was eating into her billable hours.</p>
+                    <p>Now clients book directly from her website. They see her availability, pick a time, and both get a confirmation. No back-and-forth needed.</p>
+                    <div class="example-result">
+                        <p>"I got back 5+ hours a week just from not having to schedule manually. Clients love being able to book at midnight if that's when they're planning."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Marketing -->
+    <section class="feature-section" id="email">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">✉️</span>
+                <h2>Email Marketing</h2>
+                <p>Stay in touch with customers and keep your business top of mind</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Send newsletters, promotions, and updates</li>
+                        <li>Pre-built templates for common emails</li>
+                        <li>Segment your list (past customers, leads, VIPs)</li>
+                        <li>Track opens and clicks to see what works</li>
+                        <li>Schedule emails to send at the perfect time</li>
+                        <li>Unsubscribe handling built in (stay compliant)</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Dave's HVAC Company</h3>
+                    <p>Dave knew he should be emailing past customers about seasonal maintenance, but who has time to write emails and manage a list?</p>
+                    <p>Now he sends a "Fall Furnace Tune-Up" email every September to his customer list. Takes 10 minutes to customize the template and hit send.</p>
+                    <div class="example-result">
+                        <p>"That one email brings in $15-20K in tune-up appointments every fall. Easiest marketing I've ever done."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Invoicing -->
+    <section class="feature-section" id="invoicing">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">💵</span>
+                <h2>Invoicing & Payments</h2>
+                <p>Get paid faster with professional invoices and online payments</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Create professional invoices in minutes</li>
+                        <li>Add line items, descriptions, and totals</li>
+                        <li>Send invoices via email with payment link</li>
+                        <li>Accept credit card and bank payments online</li>
+                        <li>Track paid, unpaid, and overdue invoices</li>
+                        <li>Money goes directly to your bank account</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Lisa's Interior Design Studio</h3>
+                    <p>Lisa used to send PDF invoices and wait for checks in the mail. Average time to get paid? 3-4 weeks. Some clients "forgot" entirely.</p>
+                    <p>Now she sends invoices with a "Pay Now" button. Clients click, enter their card, done. Money hits her account in 2 days.</p>
+                    <div class="example-result">
+                        <p>"My average payment time went from 25 days to 3 days. Cash flow has never been better."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot -->
+    <section class="feature-section" id="chatbot">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">🤖</span>
+                <h2>AI Chatbot</h2>
+                <p>Capture leads and answer questions 24/7—even while you sleep</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Chat widget that lives on your website</li>
+                        <li>Answers common questions automatically</li>
+                        <li>Collects contact info from interested visitors</li>
+                        <li>Sends lead details straight to your dashboard</li>
+                        <li>Customized to your business and services</li>
+                        <li>Works nights, weekends, and holidays</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Tom's Electrical Contracting</h3>
+                    <p>Tom noticed most of his website traffic came in the evening—when he was with his family and not answering the phone. Leads were slipping away.</p>
+                    <p>Now the chatbot greets visitors, asks what they need help with, and collects their info. Tom wakes up to new leads in his inbox every morning.</p>
+                    <div class="example-result">
+                        <p>"I'm getting 30% more leads than before. These are people who would've just left my site. Now they're booked jobs."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Website & Hosting -->
+    <section class="feature-section" id="website">
+        <div class="container">
+            <div class="feature-header">
+                <span class="feature-icon">🌐</span>
+                <h2>Website & Hosting</h2>
+                <p>A professional website that works hard for your business</p>
+            </div>
+
+            <div class="feature-content">
+                <div class="feature-details">
+                    <h3>What You Get</h3>
+                    <ul class="feature-list">
+                        <li>Custom-designed website for your business</li>
+                        <li>Mobile-responsive (looks great on phones)</li>
+                        <li>Fast, secure hosting included</li>
+                        <li>SSL certificate (the padlock in the browser)</li>
+                        <li>Regular backups and security updates</li>
+                        <li>Content updates when you need them</li>
+                    </ul>
+
+                    <h3 style="margin-top: 30px;">Already Have a Website?</h3>
+                    <p style="color: #c0c0c0;">No problem. We can add the chatbot, booking system, and other tools to your existing site. Or we can host and manage it for you while you focus on your business.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real Example</h4>
+                    <h3>Karen's Landscaping</h3>
+                    <p>Karen had a website built years ago. It was outdated, slow, and didn't work on phones. She was embarrassed to even put the URL on her business cards.</p>
+                    <p>We built her a clean, modern site that showcases her work. Added online booking for estimates and a chatbot to capture after-hours inquiries.</p>
+                    <div class="example-result">
+                        <p>"Customers actually comment on how nice my website is now. I went from 2-3 leads a month to 10+. It paid for itself in the first week."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Simplify Your Business?</h2>
+            <p>Let's talk about what you need. No pressure, no jargon—just a conversation about how we can help.</p>
+            <a href="index.html#contact" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Woodline Technologies, LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 800);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+    <!-- Chat Widget Script -->
+    <script src="js/chat-widget.js"></script>
+    <script>
+        // Initialize Chat Widget
+        const chatWidget = new WoodlineChatWidget({
+            emailjs: {
+                serviceId: 'service_h5nm74d',
+                templateId: 'template_1e9sfav',
+                userId: 'vb6jANY1PVAbg3clF'
+            }
+        });
+    </script>
+</body>
+</html>

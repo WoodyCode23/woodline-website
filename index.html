@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Woodline Technologies - Professional Web Design and AI Chatbot Development Services">
-    <title>Woodline Technologies | Web Design & AI Chatbot Development</title>
+    <meta name="description" content="Woodline Technologies - All-in-one business platform for small businesses. CRM, scheduling, email marketing, invoicing, and websites in one dashboard.">
+    <title>Woodline Technologies | Business Platform for Small Businesses</title>
 
     <!-- Chat Widget CSS -->
     <link rel="stylesheet" href="css/chat-widget.css">
@@ -214,8 +214,15 @@
         .hero .tagline {
             font-size: 1.5rem;
             color: #a8a8a8;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
             font-weight: 300;
+        }
+
+        .hero .hero-subtext {
+            font-size: 1.15rem;
+            color: #888;
+            margin-bottom: 40px;
+            font-weight: 400;
         }
 
         .typing-effect {
@@ -375,10 +382,78 @@
             line-height: 1.8;
         }
 
+        .platform-summary {
+            max-width: 800px;
+            margin: 50px auto 0;
+            text-align: center;
+            padding: 25px 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-summary p {
+            color: #c0c0c0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .platform-summary strong {
+            color: #ffffff;
+        }
+
+        /* Industries Section */
+        .industries {
+            padding: 100px 20px;
+            background: rgba(22, 27, 34, 0.3);
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .industry-card {
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 30px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(22, 27, 34, 0.8);
+        }
+
+        .industry-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .industry-card h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .industry-card p {
+            color: #a8a8a8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
         /* Tech Stack Section */
         .tech-stack {
             padding: 100px 20px;
-            background: rgba(22, 27, 34, 0.3);
         }
 
         .tech-grid {
@@ -549,7 +624,7 @@
                 display: none;
             }
 
-            .services-grid, .tech-grid, .contact-grid {
+            .services-grid, .tech-grid, .contact-grid, .industries-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -606,8 +681,9 @@
                 <span class="logo-text">Woodline</span>
             </a>
             <ul class="nav-links">
-                <li><a href="services.html">Services</a></li>
-                <li><a href="#tech">Tech Stack</a></li>
+                <li><a href="platform.html">Platform</a></li>
+                <li><a href="#industries">Industries</a></li>
+                <li><a href="services.html">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -618,10 +694,11 @@
         <div class="hero-content">
             <div class="hero-logo">WT</div>
             <h1>Woodline Technologies</h1>
-            <p class="tagline">Building Tomorrow's <span class="typing-effect">Digital Solutions</span></p>
+            <p class="tagline">Run Your Business. <span class="typing-effect">We Handle the Tech.</span></p>
+            <p class="hero-subtext">CRM. Scheduling. Marketing. Invoicing. All in one platform.</p>
             <div class="cta-buttons">
-                <a href="#contact" class="cta-button primary">Start Your Project</a>
-                <a href="#services" class="cta-button secondary">Explore Services</a>
+                <a href="#contact" class="cta-button primary">Get Started</a>
+                <a href="#services" class="cta-button secondary">See What's Included</a>
             </div>
         </div>
     </section>
@@ -629,61 +706,94 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <h2 class="section-title">What We Do</h2>
-            <p class="section-subtitle">Complete web solutions, simplified for your business</p>
+            <h2 class="section-title">Everything You Need to Run Your Business</h2>
+            <p class="section-subtitle">One platform. One login. One monthly price.</p>
 
             <div class="services-grid">
-                <div class="service-card" style="grid-column: 1 / -1; max-width: 900px; margin: 0 auto;">
-                    <div class="service-icon">🚀</div>
-                    <h3>All-In-One Monthly Package</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 20px;">Everything your business needs to succeed online, managed for you with predictable monthly pricing.</p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; text-align: left;">
-                        <div>
-                            <strong style="color: #ffffff;">✓ Website Development</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">Custom-built, mobile-responsive site</p>
-                        </div>
-                        <div>
-                            <strong style="color: #ffffff;">✓ Secure Hosting</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">Fast, reliable, and fully managed</p>
-                        </div>
-                        <div>
-                            <strong style="color: #ffffff;">✓ AI Chatbot</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">24/7 customer engagement</p>
-                        </div>
-                        <div>
-                            <strong style="color: #ffffff;">✓ Security & SSL</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">Enterprise-grade protection</p>
-                        </div>
-                        <div>
-                            <strong style="color: #ffffff;">✓ Ongoing Maintenance</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">Updates, backups, and support</p>
-                        </div>
-                        <div>
-                            <strong style="color: #ffffff;">✓ Performance Monitoring</strong>
-                            <p style="font-size: 0.95rem; margin-top: 5px;">Always fast and optimized</p>
-                        </div>
-                    </div>
-                    <p style="margin-top: 25px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border-left: 3px solid #ffffff;">
-                        <strong>No surprises. No technical headaches.</strong> One monthly fee covers everything—development, hosting, security, AI tools, and ongoing support. Focus on your business while we handle the technology.
-                    </p>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Business Dashboard & CRM</h3>
+                    <p>Keep all your contacts, leads, and customer info in one place. Track interactions, add notes, and never lose a lead again.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">🌐</div>
-                    <h3>Website Development Only</h3>
-                    <p>Need just a website? We build modern, fast, and mobile-responsive sites optimized for your business goals.</p>
+                    <div class="service-icon">📅</div>
+                    <h3>Booking & Scheduling</h3>
+                    <p>Let customers book appointments online. Automated reminders, calendar sync, and no more back-and-forth emails.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✉️</div>
+                    <h3>Email Marketing</h3>
+                    <p>Send newsletters, promotions, and updates to your customers. Built-in templates and analytics to grow your business.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💵</div>
+                    <h3>Invoicing & Payments</h3>
+                    <p>Create professional invoices and get paid online. Track what's paid, what's pending, and keep your cash flow healthy.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">🤖</div>
-                    <h3>AI Chatbot Integration</h3>
-                    <p>Add intelligent conversational AI to your existing website to engage customers 24/7 and automate support.</p>
+                    <h3>AI Chatbot</h3>
+                    <p>Capture leads 24/7 with an intelligent chatbot on your website. Answers questions and sends inquiries straight to your dashboard.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">☁️</div>
-                    <h3>Hosting & Management</h3>
-                    <p>Already have a site? We'll host, secure, maintain, and optimize it with our managed hosting service.</p>
+                    <div class="service-icon">🌐</div>
+                    <h3>Website & Hosting</h3>
+                    <p>Need a website? We build it. Already have one? We host and manage it. SSL, backups, and updates all included.</p>
+                </div>
+            </div>
+
+            <div class="platform-summary">
+                <p><strong>No technical skills required.</strong> We set everything up, train you on the dashboard, and provide ongoing support. One predictable monthly fee—no surprises.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries" id="industries">
+        <div class="container">
+            <h2 class="section-title">Built for Small Businesses</h2>
+            <p class="section-subtitle">Whether you're a contractor, consultant, or service provider—we've got you covered</p>
+
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <span class="industry-icon">🔧</span>
+                    <h3>Trades & Contractors</h3>
+                    <p>Plumbers, electricians, HVAC, landscapers. Schedule jobs, send quotes, and get paid faster.</p>
+                </div>
+
+                <div class="industry-card">
+                    <span class="industry-icon">💼</span>
+                    <h3>Consultants & Coaches</h3>
+                    <p>Book client sessions, manage contacts, send invoices—all from one dashboard.</p>
+                </div>
+
+                <div class="industry-card">
+                    <span class="industry-icon">✈️</span>
+                    <h3>Travel Advisors</h3>
+                    <p>Manage clients, store trip details, track commissions, and stay organized.</p>
+                </div>
+
+                <div class="industry-card">
+                    <span class="industry-icon">💇</span>
+                    <h3>Salons & Wellness</h3>
+                    <p>Online booking, appointment reminders, and marketing tools to fill your calendar.</p>
+                </div>
+
+                <div class="industry-card">
+                    <span class="industry-icon">🏠</span>
+                    <h3>Real Estate & Property</h3>
+                    <p>Track leads, schedule showings, and keep clients informed throughout the process.</p>
+                </div>
+
+                <div class="industry-card">
+                    <span class="industry-icon">📦</span>
+                    <h3>Any Service Business</h3>
+                    <p>If you book appointments, manage clients, or send invoices—this platform is for you.</p>
                 </div>
             </div>
         </div>
@@ -769,8 +879,8 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Let's Build Together</h2>
-            <p class="section-subtitle">Ready to start your next project?</p>
+            <h2 class="section-title">Ready to Simplify Your Business?</h2>
+            <p class="section-subtitle">Let's talk about what you need</p>
             
             <div class="contact-grid">
                 <div class="contact-card">
